@@ -6,6 +6,18 @@ class Category(models.Model):
 
     class Meta:
         ordering = ['name']
+        verbose_name = "Category"
+        verbose_name_plural = "Categories"
+
+    def __str__(self):
+        return self.name
+
+
+class Producer(models.Model):
+    name = models.CharField(max_length=200)
+
+    class Meta:
+        ordering = ['name']
 
     def __str__(self):
         return self.name
@@ -13,6 +25,7 @@ class Category(models.Model):
 
 class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    producer = models.ForeignKey(Producer, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=200)
     image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True)
     description = models.TextField(blank=True)
