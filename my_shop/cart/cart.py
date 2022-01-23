@@ -1,6 +1,6 @@
 from decimal import Decimal
 from django.conf import settings
-from .models import Product
+from my_shop.shop.models import Product
 
 
 class Cart(object):
@@ -34,3 +34,31 @@ class Cart(object):
         if product_id in self.cart:
             del self.cart[product_id]
         self.save()
+
+    def __iter__(self):
+        """
+        Iteracja przez elementy koszyka na zakupy i pobranie
+        produktów z bazy danych.
+        """
+        product_ids = self.cart.keys()
+        products = Product.objects.filter(id__in=product_ids)
+        for product in products:
+            self.cart[str(product.id)]['product'] = product
+        for item in self.cart.values():
+            item['price'] = Decimal(item['price'])
+            item['total_price'] = item['price'] * item['quantity']
+            yield item
+
+    def __len__(self):
+        """
+        Obliczenie liczby wszystkich elementów w koszyku na zakupy.
+        """
+        return sum(item['quantity'] for item in self.cart.values())
+
+    def get_total_price(self):
+        return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
+
+    def clear(self):
+        del self.session[settings.CART_SESSION_ID]
+        self.session.modified = True
+
