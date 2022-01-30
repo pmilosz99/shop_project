@@ -115,21 +115,15 @@ ul.errorlist {
    padding:0;
 }
 
-
 #header {
-    padding:10px 100px;
-    font-size:18px;
-    overflow:auto;
-}
-
-#subheader {
     background:#ececec;
     color:#444;
     padding:15px 100px;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.3);
     overflow:auto;
 }
 
-#header .logo {
+#header .leftheader .logo {
     font-family: 'Ubuntu', sans-serif;
     float:left;
     color:#333;
@@ -137,13 +131,13 @@ ul.errorlist {
     margin-right:10%;
 }
 
-#subheader .cart {
+#header .cart {
     float:right;
-    padding-top:4px;
 }
 
 #content {
     padding:0 100px;
+    background: #efefef;
     overflow:hidden;
 }
 
