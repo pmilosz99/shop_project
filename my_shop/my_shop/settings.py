@@ -126,6 +126,10 @@ USE_TZ = True
 
 STATIC_URL = 'shop/static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "shop/static/"),
+]
+
 AUTH_USER_MODEL = 'users.User'
 
 REST_FRAMEWORK = {
