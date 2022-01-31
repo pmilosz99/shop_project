@@ -1,3 +1,4 @@
+from django.core.mail import send_mail
 from django.shortcuts import render
 from cart.cart import Cart
 from .forms import OrderCreateForm
@@ -14,6 +15,11 @@ def order_create(request):
                 OrderItem.objects.create(order=order, product=item['product'], price=item['price'],
                                          quantity=item['quantity'])
             cart.clear()
+            subject = 'Zamówienie nr {}'.format(order.id)
+            message = 'Witaj, {}! Zamówienie, które złożyłes w naszym sklepie ' \
+                      'zostanie zrealizowane w ciągu 3 dni roboczych. \n' \
+                      'Identyfikator Twojego zamówienia to {}.'.format(order.first_name, order.id)
+            send_mail(subject, message, 'shop@mail.com', order.email)
             return render(request, 'orders/order/created.html', {'order': order})
     else:
         form = OrderCreateForm()
