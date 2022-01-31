@@ -1,9 +1,11 @@
 @import url(http://fonts.googleapis.com/css?family=Ubuntu);
 
-body {
+html, body {
     margin:0;
     padding:0;
     font-family:helvetica, sans-serif;
+    background: #efefef;
+    height: 100%;
 }
 
 h1, h2, h3, h4, h5 , h6 {
@@ -21,7 +23,7 @@ a:hover {
 
 a.button, input[type="submit"] {
     color:#fff;
-    background:#5993bb;
+    background:##109e01;
     border-radius:4px;
     padding:10px 20px;
     font-size:14px;
@@ -119,7 +121,6 @@ ul.errorlist {
     background:#fff;
     color:#444;
     padding:15px 100px;
-    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.3);
     overflow:auto;
 }
 
@@ -130,6 +131,7 @@ ul.errorlist {
     font-size:22px;
     padding: 20px;
     margin-right:10%;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.3);
 }
 
 #header .cart {
