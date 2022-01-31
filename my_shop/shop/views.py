@@ -1,9 +1,15 @@
+from decimal import Decimal
+import requests
 from django.http import HttpResponse
 from django.shortcuts import render
 from rest_framework import viewsets
+from rest_framework.decorators import action
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import AllowAny
 from django.shortcuts import render, get_object_or_404
+import json
+
+from rest_framework.response import Response
 
 from .models import Category, Product
 from .serializers import CategorySerializer, ProductSerializer
@@ -20,6 +26,17 @@ class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = (AllowAny,)
+
+    @action(detail=True, methods=['get'])
+    def get_price_usd(self, request, pk):
+        product = self.get_object()
+        r = requests.get('https://api.nbp.pl/api/exchangerates/rates/A/USD/?format=json')
+        r_json = json.dumps(r.json())
+        price_usd = json.loads(r_json)["rates"][0]["mid"]
+        price = product.price / Decimal(price_usd)
+        product.price_usd = price
+        product.save()
+        return Response(price)
 
 
 def product_list(request, category_slug=None):
