@@ -116,7 +116,7 @@ ul.errorlist {
 }
 
 #header {
-    background:#ececec;
+    background:#fff;
     color:#444;
     padding:15px 100px;
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.3);
@@ -128,6 +128,7 @@ ul.errorlist {
     float:left;
     color:#333;
     font-size:22px;
+    padding: 20px;
     margin-right:10%;
 }
 
@@ -163,7 +164,7 @@ ul.errorlist {
 }
 
 #sidebar ul li.selected {
-    background:#5993bb;
+    background:#939393;
     border-radius:4px;
 }
 
@@ -184,6 +185,7 @@ ul.errorlist {
     float:left;
     text-align:center;
     line-height:1.2;
+    background: #fff;
 }
 
 .product-list .item img {
